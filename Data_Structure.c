@@ -6,6 +6,8 @@
 //  Copyright © 2017 刘根杰. All rights reserved.
 //
 
+#define GET_ARRAY_LEN(array,len){len = sizeof(array) / sizeof(array[0]);}
+
 #include <stdio.h>
 #include "Linear_Lists.h" // 线性顺序表
 #include "Linked_Lists.h" // 线性链表
@@ -20,6 +22,8 @@
 #include "exercise2.h" // 练习2
 #include "exercise3.h" // 练习3
 #include "exercise4.h" // 练习4
+
+int * array_test(int * d);
 
 int main(){
     
@@ -41,10 +45,15 @@ int main(){
     
     // 二叉排序树
     int data[10] = {1,2,3,4,5,6,7,8,9,10};
-    BSTREE T = bstree_sort_create(data); // 新建一个二叉排序树
+    int size;
+    GET_ARRAY_LEN(data, size);
+    BSTREE T = bstree_sort_create(data, size); // 新建一个二叉排序树
     
     // 二叉树遍历
     layerOrder(T); // 按层遍历
+    
+    
+    // 需要解决的问题：数组中元素个数的计算，数组的传递
     
     // 练习1
     
@@ -57,4 +66,10 @@ int main(){
     return 1;
 }
 
+//int * array_test(int * d) {
+ int * array_test(int d[]) {
+    int n = sizeof(d)/sizeof(d[0]);
+    printf("%d\n", n);
+    return d;
+}
 

@@ -42,7 +42,7 @@ void print_btree_iterate_result(BTREE queue[]); // 在函数内部使用的函�
  从这里可以看到，数据结构的概念还需要活学活用，光靠脑子想非晕不可。这也是数据结构这本学科的作用。
  */
 void layerOrder (BTREE T) {
-    BTREE queue[100]; // 用于存放遍历后的结点数组
+    BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
     BTREE p; // 临时折腾数据用
     int front = -1; // 队头，pop，用于考量在数组中处理最靠前的一个结点
     int rear = 0; // 队尾，push，用于考量把结点加入数组
@@ -52,17 +52,18 @@ void layerOrder (BTREE T) {
         if (p->lchild != NULL) queue[++rear] = p->lchild; // “从队尾 push”
         if (p->rchild != NULL) queue[++rear] = p->rchild; // “从队尾 push”
     }
+    
     print_btree_iterate_result(queue); // 把遍历后的结点数组中的数据都打印出来
 }
 
 // 把遍历后的结点数组中的数据都打印出来
-void print_btree_iterate_result (BTREE queue[]) {
-    int n = 10;
-    int i;
+void print_btree_iterate_result (BTREE * queue) {  // 参数也可以定义成 BTREE queue[]。不会报错。
+    int i = 0;
     char token = 0x0;
-    for (i = 0; i < n; i++) {
+    while (queue[i] != NULL) {
         printf("%c%d", token, queue[i]->data);
         token = ',';
+        i++;
     }
     printf("\n");
 }

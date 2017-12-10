@@ -20,8 +20,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GET_ARRAY_LEN(array,len){len = sizeof(array) / sizeof(array[0]);}
-
 // 二叉排序树 二叉链式存储 结构定义
 typedef BTNode BSTNode;
 typedef BTREE BSTREE;
@@ -59,12 +57,10 @@ BSTREE bstree_sort_add (BSTREE T, int data) {
 
 // 新建一个二叉排序树  data 需要生成二叉排序树的所有数据
 // 根据给定的不同初始数组，根据其数据的大小相对顺序，根据如下算法生成的二叉排序树是不相同的。
-BSTREE bstree_sort_create (int data[]) {
+BSTREE bstree_sort_create (int data[], int size) {
     BSTREE T = NULL;
     int i;
-    //int n = sizeof(&data) / sizeof(data[0]); // 获取数组的长度, 也可以在宏中定义
-    int n = 10;
-    //GET_ARRAY_LEN (&data, n); // 获取数组的长度，GET_ARRAY_LEN 在宏中定义
+    int n = size;
     for (i = 0; i < n; i ++) {
         T = bstree_sort_add(T, data[i]);
     }
