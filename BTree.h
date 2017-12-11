@@ -26,7 +26,7 @@ void preOrder (BTREE T) {
     BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
     int queueNo = -1; // queue 的序列
     BTREE p = T; // 临时折腾数据用，从根结点开始处理
-    BTREE stack[20]; // 用于处理中序遍历逻辑
+    BTREE stack[20]; // 用于处理前序遍历逻辑
     int top = -1; // 堆栈初始位置
     if (T != NULL) { // 边界处理
         do {
@@ -76,29 +76,30 @@ void inOrder (BTREE T) {
 // 后序遍历
 void postOrder (BTREE T) {
     BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
-    BTREE queue2[20] = {NULL}; // 用于存放遍历后的结点数组
-    int queueNo = 0; // queue 的序列
+    int queueNo = -1; // queue 的序列
     BTREE p = T; // 临时折腾数据用，从根结点开始处理
-    BTREE stack[20]; // 用于处理中序遍历逻辑
+    BTREE stack[20]; // 用于处理后序遍历逻辑
+    int stack2[20]; // 记录结点被处理的状态
     int top = -1; // 堆栈初始位置
+    int flag; // 0 该结点暂不访问 1 该结点可以访问，显示结点被处理的状态
     if (T != NULL) { // 边界处理
         do {
-            while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+            while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈 stack 中
                 stack[++top] = p;
-                queue2[queueNo++] = p; //stack 中的倒序就是后序遍历的结果
+                stack2[top] = 0; //
                 p = p->lchild;
             }
-            p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
-            p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
+            p = stack[top]; // 从栈顶弹出一个
+            flag = stack2[top--]; // 标识，然后 top 位置减去一
+            if (flag == 0) {
+                stack[++top] = p;
+                stack2[top] = 1; 
+                p = p->rchild; // p 给成它的右结点
+            } else {
+                queue[++queueNo] = p; // 遍历成功一个，记录到 queue 中
+                p = NULL; //
+            }
         } while (p != NULL || top != -1);
-    }
-    
-    // 后序遍历的结果就是 stack 中的倒序
-    int n; // queue 中的个数
-    int i = 0;
-    for (n = queueNo - 1; n > -1; n--) {
-        queue[i] = queue2[n];
-        i ++;
     }
     
     print_btree_iterate_result(queue, "postOrder"); // 把遍历后的结点数组中的数据都打印出来
