@@ -50,8 +50,10 @@ int main(){
     BSTREE T = bstree_sort_create(data, size); // 新建一个二叉排序树
     
     // 二叉树遍历
+    preOrder(T); // 前序遍历
+    inOrder(T); // 中序遍历
+    postOrder(T); // 后序遍历
     layerOrder(T); // 按层遍历
-    
     
     // 需要解决的问题：数组中元素个数的计算，数组的传递
     
@@ -66,10 +68,5 @@ int main(){
     return 1;
 }
 
-//int * array_test(int * d) {
- int * array_test(int d[]) {
-    int n = sizeof(d)/sizeof(d[0]);
-    printf("%d\n", n);
-    return d;
-}
+
 

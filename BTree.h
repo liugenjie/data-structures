@@ -19,13 +19,90 @@ typedef struct bnode {
     struct bnode *lchild, *rchild;
 }BTNode, *BTREE;
 
-void print_btree_iterate_result(BTREE queue[]); // 在函数内部使用的函数需要提前声明
+void print_btree_iterate_result(BTREE queue[], char order[]); // 在函数内部使用的函数需要提前声明
 
 // 前序遍历
+void preOrder (BTREE T) {
+    BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
+    int queueNo = -1; // queue 的序列
+    BTREE p = T; // 临时折腾数据用，从根结点开始处理
+    BTREE stack[20]; // 用于处理中序遍历逻辑
+    int top = -1; // 堆栈初始位置
+    if (T != NULL) { // 边界处理
+        do {
+            while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+                queue[++queueNo] = p; // 遍历成功一个，记录到 queue 中
+                stack[++top] = p;
+                p = p->lchild;
+            }
+            p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
+            p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
+        } while (p != NULL || top != -1);
+    }
+    
+    print_btree_iterate_result(queue, "preOrder"); // 把遍历后的结点数组中的数据都打印出来
+}
 
 // 中序遍历
+/** 推演过程
+ 使用堆栈
+ 1 若 p 指向的结点非空，则将 p 指向的结点进栈，然后将 p 指向左子树的根
+ 2 若 p 指向的结点为空，则从堆栈中退出栈顶元素送 p，记录p，然后将 p 指向右子树的根。
+ 重复上述过程，直到 p 为空，并且堆栈也为空。
+ 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+ 从堆栈中弹出栈顶元素，以此同理循环子树中的右侧，并压入堆栈中
+ */
+void inOrder (BTREE T) {
+    BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
+    int queueNo = -1; // queue 的序列
+    BTREE p = T; // 临时折腾数据用，从根结点开始处理
+    BTREE stack[20]; // 用于处理中序遍历逻辑
+    int top = -1; // 堆栈初始位置
+    if (T != NULL) { // 边界处理
+        do {
+        while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+            stack[++top] = p;
+            p = p->lchild;
+        }
+        p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
+        queue[++queueNo] = p; // 遍历成功一个，记录到 queue 中
+        p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
+        } while (p != NULL || top != -1);
+    }
+    
+    print_btree_iterate_result(queue, "inOrder"); // 把遍历后的结点数组中的数据都打印出来
+}
 
 // 后序遍历
+void postOrder (BTREE T) {
+    BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
+    BTREE queue2[20] = {NULL}; // 用于存放遍历后的结点数组
+    int queueNo = 0; // queue 的序列
+    BTREE p = T; // 临时折腾数据用，从根结点开始处理
+    BTREE stack[20]; // 用于处理中序遍历逻辑
+    int top = -1; // 堆栈初始位置
+    if (T != NULL) { // 边界处理
+        do {
+            while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+                stack[++top] = p;
+                queue2[queueNo++] = p; //stack 中的倒序就是后序遍历的结果
+                p = p->lchild;
+            }
+            p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
+            p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
+        } while (p != NULL || top != -1);
+    }
+    
+    // 后序遍历的结果就是 stack 中的倒序
+    int n; // queue 中的个数
+    int i = 0;
+    for (n = queueNo - 1; n > -1; n--) {
+        queue[i] = queue2[n];
+        i ++;
+    }
+    
+    print_btree_iterate_result(queue, "postOrder"); // 把遍历后的结点数组中的数据都打印出来
+}
 
 // 按层遍历
 /** 手工推演过程
@@ -53,13 +130,14 @@ void layerOrder (BTREE T) {
         if (p->rchild != NULL) queue[++rear] = p->rchild; // “从队尾 push”
     }
     
-    print_btree_iterate_result(queue); // 把遍历后的结点数组中的数据都打印出来
+    print_btree_iterate_result(queue, "layerOrder"); // 把遍历后的结点数组中的数据都打印出来
 }
 
 // 把遍历后的结点数组中的数据都打印出来
-void print_btree_iterate_result (BTREE * queue) {  // 参数也可以定义成 BTREE queue[]。不会报错。
+void print_btree_iterate_result (BTREE * queue, char order[]) {  // 参数也可以定义成 BTREE queue[]。不会报错。
     int i = 0;
     char token = 0x0;
+    printf("%s: ", order);
     while (queue[i] != NULL) {
         printf("%c%d", token, queue[i]->data);
         token = ',';
