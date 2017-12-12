@@ -70,6 +70,20 @@ BSTREE bstree_sort_create (int data[], int size) {
 // 删除一个数据
 
 // 查找一个数据
+BSTREE bstree_sort_search (BSTREE T, int data) {
+    BSTREE p = T;
+    while (p != NULL) {
+        if (data == p->data) {
+            return p;
+        }
+        if (data < p->data) {
+            p = p->lchild;
+        } else {
+            p = p->rchild;
+        }
+    }
+    return NULL;
+}
 
 
 #endif /* BTree_Sort_h */
