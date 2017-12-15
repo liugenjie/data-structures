@@ -18,6 +18,8 @@
 #include "BTree.h" // 二叉树
 #include "BTree_Threaded.h" // 线索二叉树
 #include "BTree_Sort.h" // 二叉排序树
+#include "File.h" // 文件
+#include "Sort.h" // 排序
 #include "exercise1.h" // 练习1
 #include "exercise2.h" // 练习2
 #include "exercise3.h" // 练习3
@@ -55,7 +57,18 @@ int main(){
     postOrder(T); // 后序遍历
     layerOrder(T); // 按层遍历
     
-    // 需要解决的问题：数组中元素个数的计算，数组的传递
+    // 文件
+    
+    // 排序
+    int data2[] = {49, 38, 97, 76, 65, 13, 27, 50};
+    int data2_len;
+    GET_ARRAY_LEN(data2, data2_len);
+    sort_output(data2, data2_len, "source data"); // 原数据
+    sort_insert(data2, data2_len); // 插入排序法
+    sort_bininsert(data2, data2_len); // 折半插入排序法
+    sort_select(data2, data2_len); // 选择排序法
+    sort_bubble(data2, data2_len); // 冒泡排序法
+    sort_shell(data2, data2_len); // 希尔排序法
     
     // 练习1
     
