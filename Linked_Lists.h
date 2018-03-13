@@ -5,6 +5,7 @@
 //  Created by 刘根杰 on 06/12/2017.
 //  Copyright © 2017 刘根杰. All rights reserved.
 //
+//  线性链表
 
 #ifndef Linked_Lists_h
 #define Linked_Lists_h

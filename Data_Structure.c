@@ -29,6 +29,8 @@ int * array_test(int * d);
 
 int main(){
     
+    // 顺序表
+    
     // 线性链表
     LinkList list = create(4);
     list = insertFromFirst(list, "sdf"); // 在链表首位插入一个node

@@ -15,8 +15,8 @@
 
 // 链式 堆栈 结构定义
 typedef struct snode {
-    char data [100];
-    struct snode * link;
+    char data [100];  // 结点的数据，数据是个字符串形式
+    struct snode * link; // 下一个结点的指针
 }STNode, *STLink;
 
 STLink top_stlink = NULL; // 栈顶节点

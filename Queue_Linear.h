@@ -15,10 +15,10 @@
 #include <string.h>
 
 // 队列 顺序存储 结构定义
-char queue[M];
-int front = -1; // 对头位置的前一个位置
+char queue[M]; // 数据是单个字符形式
+int front = -1; // 对头位置的前一个位置，-1
 int * pFront = &front;
-int rear = -1; // 对尾位置
+int rear = -1; // 对尾位置 -1
 int * pRear = &rear;
 
 // 初始化

@@ -60,13 +60,13 @@ void inOrder (BTREE T) {
     int top = -1; // 堆栈初始位置
     if (T != NULL) { // 边界处理
         do {
-        while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
-            stack[++top] = p;
-            p = p->lchild;
-        }
-        p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
-        queue[++queueNo] = p; // 遍历成功一个，记录到 queue 中
-        p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
+            while (p != NULL) {  // 先通过循环把根、左侧的一系列子树的根、和这些子树的根对应的左结点，都压入堆栈中
+                stack[++top] = p;
+                p = p->lchild;
+            }
+            p = stack[top--]; // 从栈顶弹出一个，然后 top 位置减去一
+            queue[++queueNo] = p; // 遍历成功一个，记录到 queue 中
+            p = p->rchild; // p 给成它的右结点，对这个结点再同样的逻辑再来一遍
         } while (p != NULL || top != -1);
     }
     

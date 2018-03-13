@@ -15,8 +15,8 @@
 #include <string.h>
 
 // Stack 的顺序存储结构
-char stack[M];
-int top;
+char stack[M]; // 栈，用数组，数据是单个字符
+int top; // 栈顶元素的位置，从 0 开始计
 int * pTop = &top;
 
 // Stack 初始化, pTop 须是 top 的指针，x 是初始化的数值
@@ -40,6 +40,7 @@ int push_linear (char stack[], int * pTop, char data) {
     if(full_linear(top)){
         return -1;
     } else {
+        // 栈顶推进一个
         *pTop += 1;
         int a = * pTop;
         stack[a] = data;

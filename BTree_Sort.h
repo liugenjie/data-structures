@@ -24,7 +24,7 @@
 typedef BTNode BSTNode;
 typedef BTREE BSTREE;
 
-// 插入一个数据（逐点s插入法）data 要插入的数据
+// 插入一个数据（逐点插入法）data 要插入的数据
 BSTREE bstree_sort_add (BSTREE T, int data) {
     BSTREE p = (BSTREE)malloc(sizeof(BSTNode)); // 新建一个新结点
     p->data = data; // data 是数字，不用 strcpy 函数

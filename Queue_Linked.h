@@ -15,8 +15,8 @@
 
 // 队列 链式存储 结构定义
 typedef struct qnode {
-    char data[100];
-    struct qnode * link;
+    char data[100]; // 结点中的数据，数据是个字符串
+    struct qnode * link; // 队列中的下一个结点
 } QNode, *QLink;
 
 // 初始化
