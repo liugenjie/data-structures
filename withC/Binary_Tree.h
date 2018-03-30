@@ -5,6 +5,7 @@
 //  Created by 刘根杰 on 08/12/2017.
 //  Copyright © 2017 刘根杰. All rights reserved.
 //
+// 二叉树 Binary Tree
 
 #ifndef BTree_h
 #define BTree_h
@@ -21,7 +22,7 @@ typedef struct bnode {
 
 void print_btree_iterate_result(BTREE queue[], char order[]); // 在函数内部使用的函数需要提前声明
 
-// 前序遍历
+// 前序遍历（非递归）
 void preOrder (BTREE T) {
     BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
     int queueNo = -1; // queue 的序列
@@ -43,7 +44,7 @@ void preOrder (BTREE T) {
     print_btree_iterate_result(queue, "preOrder"); // 把遍历后的结点数组中的数据都打印出来
 }
 
-// 中序遍历
+// 中序遍历（非递归）
 /** 推演过程
  使用堆栈
  1 若 p 指向的结点非空，则将 p 指向的结点进栈，然后将 p 指向左子树的根
@@ -73,7 +74,7 @@ void inOrder (BTREE T) {
     print_btree_iterate_result(queue, "inOrder"); // 把遍历后的结点数组中的数据都打印出来
 }
 
-// 后序遍历
+// 后序遍历（非递归）
 void postOrder (BTREE T) {
     BTREE queue[20] = {NULL}; // 用于存放遍历后的结点数组
     int queueNo = -1; // queue 的序列
@@ -105,7 +106,7 @@ void postOrder (BTREE T) {
     print_btree_iterate_result(queue, "postOrder"); // 把遍历后的结点数组中的数据都打印出来
 }
 
-// 按层遍历
+// 按层遍历（非递归）
 /** 手工推演过程
  queue[0] = p;  // 0 结点的序列 queue 的序列
  queue[1] = p->lchild; // 1 queue 的序列
