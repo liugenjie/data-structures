@@ -5,6 +5,7 @@
 //  Created by 刘根杰 on 08/12/2017.
 //  Copyright © 2017 刘根杰. All rights reserved.
 //
+//  二叉排序树 Binary Sort Tree
 
 /*********** 二叉排序树 **********
  二叉排序树或者为空二叉树，或者为具有以下性质的二叉树：

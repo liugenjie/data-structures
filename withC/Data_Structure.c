@@ -9,8 +9,9 @@
 #define GET_ARRAY_LEN(array,len){len = sizeof(array) / sizeof(array[0]);}
 
 #include <stdio.h>
-#include "Linear_Lists.h" // 线性顺序表
-#include "Linked_Lists.h" // 线性链表
+#include "List_Array_Based.h" // 顺序表
+#include "List_Singly_Linked.h" // 单链表
+#include "List_Doubly_Linked.h" // 双链表
 #include "Stack_Linear.h" // 堆栈 顺序存储结构
 #include "Stack_Linked.h" // 堆栈 链式存储结构
 #include "Queue_Linear.h" // 队列 顺序存储结构
